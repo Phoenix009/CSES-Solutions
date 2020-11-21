@@ -37,5 +37,4 @@ int main(){
 		ans = min(ans, abs(grp1 - grp2));
 	}
 	cout << ans;
- 
 }
