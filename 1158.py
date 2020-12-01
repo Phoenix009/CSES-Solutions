@@ -1,15 +1,18 @@
-n, cap = list(map(int, input().split()))
+n, cap = map(int, input().split())
 weights = list(map(int, input().split()))
 values = list(map(int, input().split()))
 
-dp = [[0 for i in range(cap+1)] for i in range(n+1)]
 
+prev = [0 for i in range(cap+1)]
+new = [0]
 for i in range(1, n+1):
     for j in range(1, cap+1):
-        dp[i][j] = dp[i-1][j]
+        new.append(prev[j])
         if j-weights[i-1] > -1:
-            dp[i][j] = max(dp[i][j], dp[i-1][j-weights[i-1]] + values[i-1])
+            new[j] = max(new[j], prev[j-weights[i-1]] + values[i-1])
+    prev= new
+    new = [0]
 
-print(dp[-1][-1])
+print(prev[-1])
 
 
