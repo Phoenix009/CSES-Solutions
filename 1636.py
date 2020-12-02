@@ -1,15 +1,19 @@
-MOD = 10**9 + 7
-n, cap = map(int, input().split())
-vals = list(map(int, input().split()))
-dp = [[0 for j in range(cap+1)] for i in range(n)]
 
-for i in range(n): dp[i][0] = 1
+def helper(coins, idx, rem):
+    if rem == 0: return 1
+    if idx == len(coins): return 0 
+    elif (idx, rem) in dp: return dp[(idx, rem)]
+    else:
+        ans = 0
+        i = 0
+        while coins[idx]*i <= rem:
+            ans += helper(coins, idx+1, rem-coins[idx]*i)
+            i += 1
+        dp[(idx, rem)] = ans
+        return ans
 
-for i in range(n):
-    for j in range(1, cap+1):
-        if i-1 > -1: dp[i][j] += dp[i-1][j]
-        if j-vals[i] > -1: dp[i][j] += dp[i][j-vals[i]]
-        dp[i][j] %= MOD
-
-print(dp[-1][-1])
-
+n, x = map(int, input().split())
+coins = list(map(int, input().split()))
+dp = {}
+ans = helper(coins, 0, x)
+print(ans)

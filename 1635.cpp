@@ -5,7 +5,7 @@ using namespace std;
 #define ll long long
 #define au auto
 #define REP(i, a, n, inc) for(au i=a; i<n; i+=inc)
-#define MAX 1e9
+#define MOD 1000000007
 
 int main(){
     l n, x;
@@ -14,15 +14,12 @@ int main(){
     REP(i, 0, n, 1) cin >> coins[i];
 
     l dp[x+1];
-    dp[0] = 0;
-
+    dp[0] = 1;
     REP(i, 1, x+1, 1){
-        dp[i] = -1;
+        dp[i] = 0;
         REP(j, 0, n, 1){
-            if (i-coins[j] > -1 && dp[i-coins[j]] != -1){
-                if (dp[i] == -1) dp[i] = dp[i-coins[j]] + 1;
-                else dp[i] = min(dp[i], dp[i-coins[j]] + 1);
-            }
+            if(i-coins[j] > -1) dp[i] += dp[i-coins[j]];
+            dp[i] %= MOD;
         }
     }
     cout << dp[x];
