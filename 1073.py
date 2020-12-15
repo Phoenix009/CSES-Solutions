@@ -11,4 +11,7 @@ for i in range(1, n):
     else:
         ans[idx] = arr[i]
 
+for i in range(int(input())):
+    n, m = int(input().split())
+
 print(len(ans))

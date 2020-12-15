@@ -30,10 +30,3 @@ ans = getAns(graph, 1, marked, 0)
 print(ans)
 
 
-
-
-
-
-
-
-
